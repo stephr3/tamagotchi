@@ -9,6 +9,7 @@ get('/') do
 end
 
 post('/main') do
+  Tamagotchi.clear()
   name = params.fetch('name')
   @pet = Tamagotchi.new(name)
   @pet.save()
@@ -18,14 +19,8 @@ end
 get('/main') do
   @pets = Tamagotchi.all()
   @pet = @pets[0]
-  erb(:main)
-end
-
-get('/stats') do
-  @pets = Tamagotchi.all()
-  @pet = @pets[0]
   @pet.time_passes()
-  erb(:stats)
+  erb(:main)
 end
 
 get('/feed') do

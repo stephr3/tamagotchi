@@ -1,9 +1,30 @@
 <%= @pet.name() %>
 
-<p>Click <a href='/stats'>here</a> to check stats</p>
-
-<p>Click <a href='/feed'>here</a> to feed your tamagotchi</p>
-<p>Click <a href='/sleep'>here</a> to put your tamagotchi to bed</p>
-<p>Click <a href='/play'>here</a> to play with your tamagotchi</p>
-
+<% if !(@pet.is_alive()) %>
+<p><img src="/img/dead.jpg"></p>
+<p>Your pet died </p>
 <p><a href='/'>make a new pet</a></p>
+<% end %>
+
+<% if @pet.is_alive() %>
+<meta http-equiv="refresh" content="1">
+<p>Food Level: <%= @pet.food_level() %></p>
+<p>Sleep Level: <%= @pet.sleep_level() %></p>
+<p>Activity Level: <%= @pet.activity_level() %></p>
+<% end %>
+
+<% if @pet.is_alive() %>
+<p><img src="/img/main.gif"></p>
+
+<form action="/feed">
+  <button type="submit">Feed</button>
+</form>
+
+<form action="/sleep">
+  <button type="submit">Sleep</button>
+</form>
+
+<form action="/play">
+  <button type="submit">Play</button>
+</form>
+<% end %>

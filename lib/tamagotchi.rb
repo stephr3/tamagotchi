@@ -45,12 +45,12 @@ class Tamagotchi
   define_method(:time_passes) do
     timenow = Time.new
     timestarted = @timestarted
-    time_elapsed_min = ((timenow - timestarted) / 60).floor()
-      new_food_level = (@food_level -= (time_elapsed_min.floor()))
+    time_elapsed_min = ((timenow - timestarted)).floor()
+      new_food_level = (@food_level -= ((time_elapsed_min).floor()))
       self.set_food_level(new_food_level)
-      new_sleep_level = (@sleep_level -= (time_elapsed_min.floor()))
+      new_sleep_level = (@sleep_level -= ((time_elapsed_min).floor()))
       self.set_sleep_level(new_sleep_level)
-      new_activity_level = (@activity_level -= (time_elapsed_min.floor()))
+      new_activity_level = (@activity_level -= ((time_elapsed_min).floor()))
       self.set_activity_level(new_activity_level)
     @timestarted = Time.new
   end

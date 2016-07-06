@@ -27,7 +27,6 @@ class Tamagotchi
   end
 
   define_method(:is_alive) do
-    self.time_passes()
     (@food_level > 0 ? true : false) && (@sleep_level > 0 ? true : false) && (@activity_level > 0 ? true : false)
   end
 
@@ -46,12 +45,13 @@ class Tamagotchi
   define_method(:time_passes) do
     timenow = Time.new
     timestarted = @timestarted
-    new_food_level = (@food_level -= ((timenow - timestarted) / 5).floor())
-    self.set_food_level(new_food_level)
-    new_sleep_level = (@sleep_level -= ((timenow - timestarted) / 5).floor())
-    self.set_sleep_level(new_sleep_level)
-    new_activity_level = (@activity_level -= ((timenow - timestarted) / 5).floor())
-    self.set_activity_level(new_activity_level)
+    time_elapsed_min = ((timenow - timestarted) / 60).floor()
+      new_food_level = (@food_level -= (time_elapsed_min.floor()))
+      self.set_food_level(new_food_level)
+      new_sleep_level = (@sleep_level -= (time_elapsed_min.floor()))
+      self.set_sleep_level(new_sleep_level)
+      new_activity_level = (@activity_level -= (time_elapsed_min.floor()))
+      self.set_activity_level(new_activity_level)
     @timestarted = Time.new
   end
 
